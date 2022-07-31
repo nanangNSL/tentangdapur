@@ -112,30 +112,31 @@ a {
 }
 
 .card-mini:nth-child(2) {
-  background-color: darkcyan !important;
+  background-color: rgb(3, 149, 149) !important;
   margin: 1%;
   color: #2e266f;
 }
 .card-mini:nth-child(3) {
-  background-color: indianred !important;
+  background-color: rgb(191, 80, 80) !important;
   margin: 1%;
   color: #2e266f;
 }
 .card-mini:nth-child(odd) {
-  background-color: darkcyan !important;
+  background-color: rgb(2, 114, 114) !important;
   margin: 1%;
   color: #2e266f;
 }
 .card-mini:nth-child(even) {
-  background-color: indianred !important;
+  background-color: rgb(205, 92, 92) !important;
   margin: 1%;
   color: #2e266f;
 }
 /* grid row recipe*/
 
 .container-mobile {
-  width: 33.5vw;
+  width: 425px;
   border-radius: 10px;
+  background-color: #2e266f !important;
 }
 
 /* search */
@@ -168,4 +169,196 @@ form button {
   color: #2e266f !important;
   margin-bottom: 15vh;
   border-radius: 10px 10px 0px 0px !important;
+}
+/* Login  */
+.container-login {
+  background-color: #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center !important;
+  align-items: center;
+  justify-items: center;
+  /* margin-top: 20vh; */
+  padding: 5%;
+  height: 100vh;
+}
+.bg-avatar {
+  width: 12rem;
+  height: 12rem;
+  border-radius: 50%;
+  justify-content: center;
+  text-align: center;
+  padding: 10%;
+  background-color: #c4c4c4;
+}
+.bg-avatar .icon {
+  font-size: 100px;
+  color: #f5f5f5;
+}
+div h5 {
+  text-align: center;
+  margin-top: 4vh;
+  color: #eec302;
+}
+
+.form-login input {
+  border: #c4c4c4 !important;
+  width: 350px !important;
+}
+.form-login textarea {
+  background-color: #efefef !important;
+  color: #999999;
+  width: 350px !important;
+  border: none;
+  border-radius: 5px;
+  margin-top: 1%;
+  margin-left: 2.5%;
+  padding: 1%;
+}
+.form-login .password {
+  margin-top: -7%;
+}
+.row-login {
+  margin-top: -10%;
+}
+.text-mini {
+  float: right;
+  margin-right: 3vw;
+  font-size: 10px;
+  font-weight: bold;
+  color: #999999;
+}
+.button-login {
+  background-color: #eec302 !important;
+  border: none;
+  width: 350px !important;
+  margin-left: 2%;
+  height: 50px;
+  border-radius: 15px;
+  padding: 2%;
+  margin-top: 3vh;
+  color: #999999;
+}
+.button-login:hover {
+  background-color: #2e266f !important;
+  border: none;
+  width: 350px !important;
+  margin-left: 2%;
+  height: 50px;
+  border-radius: 15px;
+  padding: 2%;
+  margin-top: 3vh;
+  color: #999999;
+}
+/* add recipe */
+
+/* profile */
+.bg-profile {
+  width: 100%;
+  height: 50vh;
+  background-color: #eec302;
+}
+.bg-col-profile {
+  width: 96.5%;
+  height: 70vh;
+  margin-top: -14vh;
+  border-radius: 20px 20px 0px 0px;
+}
+.image-profile {
+  width: 10rem !important;
+  height: 10rem;
+  border-radius: 50% !important;
+}
+.container-image {
+  display: flex;
+  justify-content: center;
+}
+.container-image h3 {
+  color: #e7e7e7;
+}
+
+ul li {
+  list-style-type: none;
+  color: #eec302 !important;
+}
+.btn-linkprofile {
+  width: 90%;
+}
+li .icon {
+  float: left;
+  font-size: 25px;
+}
+li span {
+  margin-left: 1vw;
+  float: left;
+}
+li .icon-end {
+  float: right;
+  font-size: 25px;
+}
+li button {
+  margin: 1%;
+  color: #eec302 !important;
+}
+li button:hover {
+  background-color: #e5e5e5 !important;
+  font-size: 24px !important;
+}
+
+.image-bg-recipe {
+  position: relative;
+}
+.bg-image-recipe {
+  width: 435px;
+  height: 70vh;
+  margin-top: -14vh;
+  border-radius: 20px 20px 0px 0px;
+  background-color: #ffffff;
+  margin-top: -7vh;
+  position: absolute;
+  margin-left: 0.5%;
+}
+.detail-image {
+  position: absolute;
+  margin-top: -25vh;
+  color: #ffffff;
+  margin-left: 1vw;
+  display: flex;
+  width: 425px;
+
+}
+.detail-image small {
+  font-size: 9px;
+  margin-left: 0.1vw;
+  font-weight: bold;
+  color: #b0b0b0;
+}
+.bg-icons{
+  margin-left: 35%;
+  display: flex;
+  margin-top: 8%;
+}
+.bg-icons button:nth-child(1){
+  width: 2rem; background-color: #eec302;
+  height: 2rem;
+  margin: 7%;
+  border-radius: 5px;
+  border: none;
+  color: #ffffff;
+}
+.bg-icons button:nth-child(2){
+  width: 2rem; background-color: #ffffff;
+  height: 2rem;
+  margin: 7%;
+  border-radius: 5px;
+  border: none;
+  color: #eec302;
+}
+.bg-icons button:hover{
+  width: 2rem; background-color: #2e266f;
+  height: 2rem;
+  margin: 7%;
+  border-radius: 5px;
+  border: none;
+  color: #ffffff;
 }
