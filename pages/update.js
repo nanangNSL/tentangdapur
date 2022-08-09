@@ -1,13 +1,13 @@
 import Style from "../styles/pages/Home.module.css";
-import Profile from "../components/profile/dashboard";
+import Edit from "../components/profile/edit.js";
 import Navbar from "../components/navbar";
 
-export default function PageProfile(){
+export default function PageUpdate(){
     return (
         <>
         <div className={Style.containerFluid}>
         <div className={Style.container}>
-            <Profile/>
+            <Edit/>
             <Navbar />
         </div>
       </div>

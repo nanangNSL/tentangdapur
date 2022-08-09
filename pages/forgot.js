@@ -1,14 +1,12 @@
 import Style from "../styles/pages/Home.module.css";
-import Profile from "../components/profile/dashboard";
-import Navbar from "../components/navbar";
+import Forgot from "../components/profile/forgot";
 
-export default function PageProfile(){
+export default function PageForgot(){
     return (
         <>
         <div className={Style.containerFluid}>
         <div className={Style.container}>
-            <Profile/>
-            <Navbar />
+            <Forgot/>
         </div>
       </div>
         

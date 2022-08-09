@@ -2,8 +2,13 @@ import Card from "react-bootstrap/Card";
 
 export default function NewRecipe() {
   return (
-    <Card body className="banner-pop-mobile  border-0 ">
-      <h1 style={{ fontSize: "20px" }}>New Recipe</h1>
+    <Card className="banner-pop-mobile-new  d-flex flex-row  border-0">
+      <div className="col-6 mt-2">
+        <h1 style={{ fontSize: "18px" }}>New Recipe</h1>
+      </div>
+      <div className="col-6 mt-2">
+        <a href="/search"className="text-end see-all me-2 text-decoration-none">see all</a>
+      </div>
     </Card>
   );
 }
