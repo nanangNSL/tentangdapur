@@ -4,6 +4,7 @@ import React from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import FormData from "form-data";
+import { IoMdCloudUpload } from "react-icons/io";
 
 export default function Recipe() {
   const router = useRouter();
@@ -102,17 +103,20 @@ export default function Recipe() {
               </textarea>
               <div className="priview">
               <p for="image">Preview : </p>
-              <img src={imagePreview ? imagePreview: "./food1.jpg"} width="50%" height="20%" alt="images" id="image"/>
+              <img src={imagePreview ? imagePreview: "/placeholder.png"} width="50%" height="20%" alt="images" id="image"/>
               </div>
               <div className="file">
                 <input
                   type="file"
+                  id="file"
                   className="input-file"
                   name="file"
                   placeholder="Input file"
+                  hidden
                   required
                   onChange={handleUploadChange}
                 />
+                <label for="file" className="button-label" ><IoMdCloudUpload/> Upload</label>
               </div>{" "}
               <div>
                 <button

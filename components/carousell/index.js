@@ -7,6 +7,7 @@ export default function Carousell() {
 
   return (
     <Carousel className="carousel">
+      
       <Carousel.Item interval={1000}>
         <Image src="/food4.jpg" width={500} height={320} alt="Images"/>
       </Carousel.Item>

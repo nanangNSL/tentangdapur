@@ -7,7 +7,7 @@ import { Provider, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import App from "next/app";
 import React from "react";
-import axios from 'axios';
+import Axios from "axios"
 
 
 export default class MyApp extends App {
@@ -36,8 +36,8 @@ const MainApp = ({ Component, pageProps }) => {
   const router = useRouter();
   const { auth } = useSelector((state) => state);
 
-  const axiosJWT = axios.create();
-  axiosJWT.interceptors.request.use(async (config) => {
+  const AxiosJWT = Axios.create();
+  AxiosJWT.interceptors.request.use(async (config) => {
     const currentDate = new Date();
     if (expire * 10000 < currentDate.getTime()) {
         config.headers.Authorization = `Bearer ${auth.token}`;

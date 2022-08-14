@@ -5,13 +5,17 @@ import Carousell from "../components/carousell";
 import Popular from "../components/popular";
 import Footer from "../components/footer";
 import BarBrand from "../components/search/bar";
+import Head from "next/head"
 
 export default function Home() {
   return (
     <>
-       <div className={Style.containerFluid}>
+    <Head>
+      <title>Home</title>
+    </Head>
+      <div className={Style.containerFluid}>
         <div className={Style.container}>
-          <BarBrand/>
+          <BarBrand />
           <Navbar />
           <Carousell />
           <NewRecipe />
@@ -19,7 +23,6 @@ export default function Home() {
           <Footer />
         </div>
       </div>
-     
     </>
   );
 }

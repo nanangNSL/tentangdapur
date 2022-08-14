@@ -40,7 +40,6 @@ export default function Edit() {
         },
       })
         .then((response) => {
-            console.log(response);
           const trueResponse = response.data.message;
           Swal.fire({
             title: trueResponse,
@@ -130,12 +129,12 @@ export default function Edit() {
                   required
                   onChange={(e) => setNewPassword(e.target.value)}
                 />
-                <div className="password">
+                <div className="New Password">
                   <input
                     type="password"
                     className="input-update"
                     name="password"
-                    placeholder="🔒 Confirm Password"
+                    placeholder="🔒 Confirm New Password"
                     required
                     onChange={(e) => setConfPassword(e.target.value)}
                   />

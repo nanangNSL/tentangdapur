@@ -5,16 +5,35 @@ import { useRouter } from "next/router";
 import React from "react";
 import Axios from "axios";
 import { FiPlay } from "react-icons/fi";
-import { IoArrowBack} from "react-icons/io5";
+import { IoArrowBack } from "react-icons/io5";
+import { useSelector } from "react-redux";
+import { decode } from "jsonwebtoken";
+import axios from "axios";
+import * as Type from "../../redux/like/type";
+import * as Tipe from "../../redux/save/type";
+import { useDispatch } from "react-redux";
 
 export default function Details() {
   const {
     query: { id },
   } = useRouter();
+  const dispatch = useDispatch();
+  const { auth, like , save} = useSelector((state) => state);
   const [title, setTitle] = React.useState();
   const [image, setImage] = React.useState();
   const [inggredients, setIngredient] = React.useState();
   const [change, setChange] = React.useState(false);
+  const [likes, setLike] = React.useState(false);
+  const [userLike, setUserLike] = React.useState();
+  const [user, setUser] = React.useState();
+  const [idRecipe, setIdRecipe] = React.useState("");
+  const [idLike, setIdLike] = React.useState("");
+  const [saved, setSave] = React.useState();
+
+  const handleUser = () => {
+    const decodeUser = decode(auth?.token);
+    setUser(decodeUser?.userId);
+  };
 
   const handleClickVideo = (e) => {
     e.preventDefault();
@@ -24,17 +43,95 @@ export default function Details() {
     e.preventDefault();
     setChange(false);
   };
+  const handleLike = async (req, res) => {
+    if (userLike === user) {
+    } else {
+      await axios
+        .post("http://localhost:7000/search/like", {
+          userId: user,
+          recipeId: idRecipe,
+          like: "1",
+        })
+        .then((res) => {
+          dispatch({
+            type: Type.SET_LIKE,
+            payload: {
+              like: true,
+            },
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+  const handleUnlike = async (req, res) => {
+    await axios
+      .post(`http://localhost:7000/search/unlike/${idLike}`)
+      .then((res) => {
+        dispatch({
+          type: Type.SET_LIKE,
+          payload: {
+            like: false,
+          },
+        });
+      })
+      .catch((err) => Console.log(err));
+  };
+
+  const handleValidasi = async () => {
+    setLike(like.like.like);
+    setSave(save.save.save)
+  };
+  const handleSave = async (req, res) => {
+    await axios
+      .post(`http://localhost:7000/search/save`, {
+        userId: user,
+        recipeId: idRecipe,
+      })
+      .then((res) => {
+        dispatch({
+          type: Tipe.SET_SAVE,
+          payload: {
+            save: true,
+          },
+        });
+      })
+      .catch((err) => {
+        console.log("error: " + err);
+        setSave(false);
+      });
+  };
+  const handleUnsave = async (req, res) => {
+    await axios
+      .post(`http://localhost:7000/search/save/${idRecipe}`)
+      .then(() => {
+        dispatch({
+          type: Tipe.SET_SAVE,
+          payload: {
+            save: false,
+          },
+        });
+      })
+      .catch((err) => {
+        console.log("Unsave failed: " + err);
+      });
+  };
 
   const handleData = async () => {
     const data = await Axios.get(`http://localhost:7000/post/${id}`);
     setTitle(data.data.title);
     setImage(data.data.image);
     setIngredient(data.data.inggredients);
+    setUserLike(data?.data?.likes[0]?.userId);
+    setIdLike(data.data.likes[0]?.id);
+    setIdRecipe(data.data.id);
   };
   React.useEffect(() => {
     handleData();
+    handleUser();
+    handleValidasi();
   }, []);
-
   return (
     <>
       <div className={Style.containerFluid}>
@@ -48,7 +145,7 @@ export default function Details() {
               className="image-bg-recipe"
             />
             <a href="/" className="arrow-back">
-              <IoArrowBack/>
+              <IoArrowBack />
             </a>
             <div className="row row-cols-3 row-pop-detail">
               <div className="col-sm ">
@@ -61,12 +158,47 @@ export default function Details() {
               </div>
               <div className="col-sm-2"></div>
               <div className="col-sm col-det">
-                <button type="buttons" className="btn-det-1">
-                  <BsBookmark className="icons" />
-                </button>
-                <button type="button" className="btn-det-1">
-                  <AiOutlineLike className="icons" />
-                </button>
+                {saved ? (
+                  <button
+                    onClick={handleUnsave}
+                    type="buttons"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    data-bs-title="Tooltip on top"
+                    className="btn-det-2"
+                  >
+                    <BsBookmark className="icons" />
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleSave}
+                    type="buttons"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    data-bs-title="Tooltip on top"
+                    className="btn-det-1"
+                  >
+                    <BsBookmark className="icons" />
+                  </button>
+                )}
+
+                {likes ? (
+                  <button
+                    onClick={handleUnlike}
+                    type="button"
+                    className="btn-det-2"
+                  >
+                    <AiOutlineLike className="icons" />
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleLike}
+                    type="button"
+                    className="btn-det-1"
+                  >
+                    <AiOutlineLike className="icons" />
+                  </button>
+                )}
               </div>
             </div>
           </div>

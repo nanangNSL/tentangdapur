@@ -8,6 +8,7 @@ import { AiFillStar } from "react-icons/ai";
 import { AiOutlineLike } from "react-icons/ai";
 import { BsBookmark } from "react-icons/bs";
 import { useSelector } from "react-redux";
+import Head from "next/head"
 
 export default function HomeLogin() {
   const { search } = useSelector((state) => state);
@@ -26,19 +27,28 @@ export default function HomeLogin() {
   const [keyword, setKeyword] = React.useState("");
   const [query, setQuery] = React.useState(value ? value.keywords : "");
   const [msg, setMsg] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
     getData();
   }, [page, keyword]);
 
-  const getData = async () => {
-    const response = await Axios.get(
+  const getData =  () => {
+    setIsLoading(true);
+    setTimeout(() => {
+   Axios.get(
       `http://localhost:7000/search?q=${query}&page=${page}&limit=${limit}`
-    );
-    setResult(response.data.result);
+    ).then((response) => {
+   setResult(response.data.result);
     setPage(response.data.page);
     setPages(response.data.totalPage);
     setRows(response.data.totalRows);
+    }).catch((err) => { console.log(err); })
+    .finally(() => {
+      setIsLoading(false);
+    })
+    }, 3000)
+    
   };
 
   const changePage = ({ selected }) => {
@@ -60,6 +70,9 @@ export default function HomeLogin() {
 
   return (
     <>
+    <Head>
+      <title>Find</title>
+    </Head>
       <div className={Style.containerFluid}>
         <div className={Style.container}>
           <nav className="sticky-top position-fixed top-0 start-50 translate-middle navbar-mobile shadow-sm">
@@ -95,44 +108,56 @@ export default function HomeLogin() {
                 Recipe search results {rows} Page: {rows ? page + 1 : 0} of{" "}
                 {pages}
               </p>
-              {Array.from(result).map((data) => (
-                <div
-                  key={data.id}
-                  className="d-flex flex-end  container-mobile shadow-sm  bg-body mt-2 rounded "
-                >
-                  <Link className=" class-img " href={`detail/${data.id}`}>
-                    <a className="text-decoration-none ">
-                      <div className="row row-cols-3 row-pop">
-                        <div className="col-sm">
-                          <img
-                            src={data.image}
-                            width={100}
-                            height={90}
-                            alt="Images"
-                            className=" image-class"
-                          />
-                        </div>
-                        <div className="col-sm-4 ">
-                          <div className="title-mobile">
-                            <small>{data.title}</small>
+
+              {isLoading ? (
+                <div className="d-flex justify-content-center" >
+                   <div className="spinner-border text-secondary" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+                  </div>
+               
+              ) : (
+                <span>
+                  {Array.from(result).map((data) => (
+                    <div
+                      key={data.id}
+                      className="d-flex flex-end  container-mobile shadow-sm  bg-body mt-2 rounded "
+                    >
+                      <Link className=" class-img " href={`detail/${data.id}`}>
+                        <a className="text-decoration-none ">
+                          <div className="row row-cols-3 row-pop">
+                            <div className="col-sm">
+                              <img
+                                src={data.image}
+                                width={100}
+                                height={90}
+                                alt="Images"
+                                className=" image-class"
+                              />
+                            </div>
+                            <div className="col-sm-4 ">
+                              <div className="title-mobile">
+                                <small>{data.title}</small>
+                              </div>
+                              <div className="footer-title">
+                                <small>food, healty</small>
+                              </div>
+                              <div className="rating-mobile">
+                                <AiFillStar />
+                                <small>4.7</small>
+                              </div>
+                            </div>
+                            <div className="col-sm  col-end">
+                              <AiOutlineLike className="icon" />
+                              <BsBookmark className="icon" />
+                            </div>
                           </div>
-                          <div className="footer-title">
-                            <small>food, healty</small>
-                          </div>
-                          <div className="rating-mobile">
-                            <AiFillStar />
-                            <small>4.7</small>
-                          </div>
-                        </div>
-                        <div className="col-sm  col-end">
-                          <AiOutlineLike className="icon" />
-                          <BsBookmark className="icon" />
-                        </div>
-                      </div>
-                    </a>
-                  </Link>
-                </div>
-              ))}
+                        </a>
+                      </Link>
+                    </div>
+                  ))}
+                </span>
+              )}
             </div>
             <ReactPaginate
               previousLabel={"<"}

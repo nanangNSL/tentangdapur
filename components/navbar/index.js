@@ -39,8 +39,8 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky-top bg-light position-fixed top-100 start-50 translate-middle navbar-mobile shadow-sm">
-      <div className="d-flex flex-row justify-content-center h-50  shadow">
+    <nav className="sticky-top  bg-light position-fixed top-100 start-50 translate-middle  navbar-buttom  shadow-sm">
+      <div className=" navbar-buttom  shadow-sm ">
         <button type="button" className="btn btn-lg m-1 button-bar "
         onClick={handleHome}>
           <BiHome className="icon" />

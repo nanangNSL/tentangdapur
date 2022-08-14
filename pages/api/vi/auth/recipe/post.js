@@ -1,9 +1,7 @@
 import axios from "axios";
 
 export default function handler(req, res) {
-    const body  = req.body;
-    console.log(body);
-    
+    const body  = req.body;    
     axios
       .post("http://localhost:7000/post",{body})
       .then((response) => {
