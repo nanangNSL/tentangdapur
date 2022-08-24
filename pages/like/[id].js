@@ -9,6 +9,7 @@ import useSWR from "swr";
 import Style from "../../styles/pages/Home.module.css";
 import { useRouter } from "next/router";
 import Navbar from "../../components/navbar/index";
+import Image from "next/image";
 
 export default function Myrecipe() {
     const {
@@ -46,7 +47,7 @@ export default function Myrecipe() {
                     <a className="text-decoration-none ">
                       <div className="row row-cols-3 row-pop">
                         <div className="col-sm">
-                          <img
+                          <Image
                             src="/food2.jpg"
                             width={100}
                             height={90}

@@ -5,6 +5,7 @@ import Axios from "axios";
 import FormData from "form-data";
 import Swal from "sweetalert2";
 import { IoMdCloudUpload } from "react-icons/io";
+import Image from "next/image"
 
 export default function Edit() {
   const [image, setImage] = React.useState();
@@ -18,9 +19,9 @@ export default function Edit() {
   const { auth } = useSelector((state) => state);
 
   React.useEffect(() => {
-    const decodeUser = decode(auth.token);
-    setId(decodeUser.userId);
-  }, []);
+    const decodeUser = decode(auth?.token);
+    setId(decodeUser?.userId);
+  });
 
   const handleUploadChange = (e) => {
     let uploaded = e.target.files[0];
@@ -152,7 +153,7 @@ export default function Edit() {
             </form>
           ) : (
             <div className="mt-5">
-              <img
+              <Image
                 src={imagePreview ? imagePreview : "./avatar.png"}
                 alt="image avatar"
                 width={100}
@@ -170,7 +171,7 @@ export default function Edit() {
                   onChange={handleUploadChange}
                 />
                 <div className="row con-mix">
-                  <label for="file" className="label-up col-sm-3 ">
+                  <label htmlFor="file" className="label-up col-sm-3 ">
                     <IoMdCloudUpload />
                   </label>
                   <button

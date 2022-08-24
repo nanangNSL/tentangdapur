@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function Register() {
   const router = useRouter();
@@ -117,7 +118,7 @@ export default function Register() {
               </div>{" "}
             </div>
             <small className="text-center d-flex justify-content-center mt-2">
-            Do you have an account ?<a href="/login" className="text-sign">Login</a>
+            Do you have an account ?<Link href="/login" className="text-sign">Login</Link>
             </small>
           </form>
         </div>

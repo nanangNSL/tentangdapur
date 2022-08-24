@@ -14,12 +14,19 @@ import * as Type from "../../redux/like/type";
 import * as Tipe from "../../redux/save/type";
 import { useDispatch } from "react-redux";
 import FormData from "form-data";
+import Image from "next/image"
+import Link from "next/link";
 
 
 export default function Details() {
   const {
     query: { id },
   } = useRouter();
+  React.useEffect(() => {
+    handleData();
+    handleUser();
+    handleValidasi();
+  });
   const dispatch = useDispatch();
   const { auth, like, save } = useSelector((state) => state);
   const [title, setTitle] = React.useState();
@@ -128,26 +135,22 @@ export default function Details() {
     setIdLike(data.data.likes[0]?.id);
     setIdRecipe(data.data.id);
   };
-  React.useEffect(() => {
-    handleData();
-    handleUser();
-    handleValidasi();
-  }, []);
+ 
   return (
     <>
       <div className={Style.containerFluid}>
         <div className={Style.container}>
           <div className=" bg-light border border-1 overflow-hidden">
-            <img
+            <Image
               src={image}
               width="400"
               height="300"
               alt="food2"
               className="image-bg-recipe"
             />
-            <a href="/" className="arrow-back">
+            <Link href="/" className="arrow-back">
               <IoArrowBack />
-            </a>
+            </Link>
             <div className="row row-cols-3 row-pop-detail">
               <div className="col-sm ">
                 <div className="title-det">
@@ -208,19 +211,19 @@ export default function Details() {
               <div className="card-header">
                 <ul className="nav nav-tabs card-header-tabs">
                   <li className="nav-item">
-                    <a
+                    <Link
                       className="btn-det"
                       aria-current="true"
                       href="#"
                       onClick={handleClick}
                     >
                       Inggredients
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="btn-det" href="#" onClick={handleClickVideo}>
+                    <Link className="btn-det" href="#" onClick={handleClickVideo}>
                       Video
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -252,7 +255,7 @@ export default function Details() {
                             hidden
                             required
                           />
-                          <label for="file" className="button-video">
+                          <label htmlFor="file" className="button-video">
                             {" "}
                             <FaCloudUploadAlt/> Upload
                           </label>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { Container, Row, Col } from "react-bootstrap";
+import Image from "next/image"
 
 function Chat({ socket, username, room }) {
 	const [currentMessage, setCurrentMessage] = useState("");
@@ -45,7 +46,7 @@ function Chat({ socket, username, room }) {
 									className="d-flex flex-column justify-content-center align-items-center h-75"
 									style={{ gap: "20px" }}
 								>
-									<img src={send} alt="No Chat" />
+									<Image src={send} alt="No Chat" />
 									<h5 className="fw-bold">Belum ada chat</h5>
 								</div>
 							) : (
@@ -53,7 +54,7 @@ function Chat({ socket, username, room }) {
 									<Row className="w-100 d-flex align-items-center">
 										<Col lg="3" className="md-4">
 											<div className="d-flex justify-content-center ms-1">
-												<img src={user} className="img-cover rounded-circle" alt="Test" />
+												<Image src={user} className="Image-cover rounded-circle" alt="Test" />
 											</div>
 										</Col>
 										<Col lg="9" className="md-8 flex flex-column justify-content-center" style={{ textAlign: "left" }}>
@@ -75,7 +76,7 @@ function Chat({ socket, username, room }) {
 									<div>
 										<Row>
 											<Col lg="4">
-												<img src={user} width={40} height={40} alt="Test" />
+												<Image src={user} width={40} height={40} alt="Test" />
 											</Col>
 											<Col lg="8">
 												<h5>Jonas adam</h5>
@@ -94,7 +95,8 @@ function Chat({ socket, username, room }) {
 								<ScrollToBottom className="message-container">
 									{messageList.map((messageContent) => {
 										return (
-											<div className="message" id={username === messageContent.author ? "you" : "other"}>
+											<div key={messageContent.id}>
+												<div className="message" id={username === messageContent.author ? "you" : "other"}>
 												<div className="message-content">
 													<div>
 														<p>{messageContent.message}</p>
@@ -105,6 +107,8 @@ function Chat({ socket, username, room }) {
 													</div>
 												</div>
 											</div>
+											</div>
+											
 										);
 									})}
 								</ScrollToBottom>
@@ -121,7 +125,7 @@ function Chat({ socket, username, room }) {
 										onKeyPress={(event) => event.key === "Enter" && sendMessage()}
 									/>
 									<button type="button" onClick={sendMessage}>
-										<img src={send} alt="Send Message" />
+										<Image src={send} alt="Send Message" />
 									</button>
 								</div>
 							</form>

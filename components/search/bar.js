@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import * as Type from "../../redux/search/type";
+import Image from "next/image"
 
 
 export default function BarBrand() {
@@ -27,7 +28,7 @@ export default function BarBrand() {
     <nav className="sticky-top position-fixed top-0 start-50 translate-middle navbar-mobile shadow-sm">
       <div className="d-flex">
         <a className="navbar-brand" href="#">
-          <img
+          <Image
             src="/logos.png"
             alt=""
             width="30"

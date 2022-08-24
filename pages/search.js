@@ -1,5 +1,5 @@
 import Style from "../styles/pages/Home.module.css";
-import React from "react";
+import React ,{useState} from "react";
 import { IoChevronBackOutline } from "react-icons/io5";
 import Axios from "axios";
 import ReactPaginate from "react-paginate";
@@ -8,7 +8,8 @@ import { AiFillStar } from "react-icons/ai";
 import { AiOutlineLike } from "react-icons/ai";
 import { BsBookmark } from "react-icons/bs";
 import { useSelector } from "react-redux";
-import Head from "next/head"
+import Head from "next/head";
+import Image from "next/image";
 
 export default function HomeLogin() {
   const { search } = useSelector((state) => state);
@@ -19,36 +20,40 @@ export default function HomeLogin() {
     value = search.keywords;
   }
 
-  const [result, setResult] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [limit, setLimit] = React.useState(7);
-  const [pages, setPages] = React.useState(0);
-  const [rows, setRows] = React.useState(0);
-  const [keyword, setKeyword] = React.useState("");
-  const [query, setQuery] = React.useState(value ? value.keywords : "");
-  const [msg, setMsg] = React.useState("");
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [query, setQuery] = useState(value ? value.keywords : "");
+  const [result, setResult] = useState([]);
+
+  const [keyword, setKeyword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+ const [page, setPage] = useState(0);
+  const [limit, setLimit] = useState(7);
+  const [pages, setPages] = useState(0);
+  const [rows, setRows] = useState(0);
+
 
   React.useEffect(() => {
     getData();
-  }, [page, keyword]);
-
-  const getData =  () => {
+  });
+ 
+  const getData = () => {
     setIsLoading(true);
     setTimeout(() => {
-   Axios.get(
-      `https://expressjs-firebase-nodemailer.herokuapp.com/search?q=${query}&page=${page}&limit=${limit}`
-    ).then((response) => {
-   setResult(response.data.result);
-    setPage(response.data.page);
-    setPages(response.data.totalPage);
-    setRows(response.data.totalRows);
-    }).catch((err) => { console.log(err); })
-    .finally(() => {
-      setIsLoading(false);
-    })
-    }, 3000)
-    
+      Axios.get(
+        `https://expressjs-firebase-nodemailer.herokuapp.com/search?q=${query}&page=${page}&limit=${limit}`
+      )
+        .then((response) => {
+          setResult(response.data.result);
+          setPage(response.data.page);
+          setPages(response.data.totalPage);
+          setRows(response.data.totalRows);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }, 3000);
   };
 
   const changePage = ({ selected }) => {
@@ -70,9 +75,9 @@ export default function HomeLogin() {
 
   return (
     <>
-    <Head>
-      <title>Find</title>
-    </Head>
+      <Head>
+        <title>Find</title>
+      </Head>
       <div className={Style.containerFluid}>
         <div className={Style.container}>
           <nav className="sticky-top position-fixed top-0 start-50 translate-middle navbar-mobile shadow-sm">
@@ -110,12 +115,11 @@ export default function HomeLogin() {
               </p>
 
               {isLoading ? (
-                <div className="d-flex justify-content-center" >
-                   <div className="spinner-border text-secondary" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
+                <div className="d-flex justify-content-center">
+                  <div className="spinner-border text-secondary" role="status">
+                    <span className="visually-hidden">Loading...</span>
                   </div>
-               
+                </div>
               ) : (
                 <span>
                   {Array.from(result).map((data) => (
@@ -127,7 +131,7 @@ export default function HomeLogin() {
                         <a className="text-decoration-none ">
                           <div className="row row-cols-3 row-pop">
                             <div className="col-sm">
-                              <img
+                              <Image
                                 src={data.image}
                                 width={100}
                                 height={90}

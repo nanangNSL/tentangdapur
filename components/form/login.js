@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import * as Type from "../../redux/authenticate/type";
 import React from "react";
 import Swal from "sweetalert2";
+import Link from "next/link";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -108,7 +109,7 @@ export default function Login() {
               </div>{" "}
             </div>
             <small className="text-center d-flex justify-content-center mt-2">
-              Don’t have an account? <a href="/register" className="text-sign">Sign Up</a>
+              Don’t have an account? <Link href="/register" className="text-sign">Sign Up</Link>
             </small>
           </form>
         </div>

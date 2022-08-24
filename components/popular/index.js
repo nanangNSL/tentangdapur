@@ -7,6 +7,7 @@ import Axios from "axios";
 import Link from "next/link";
 import { AiOutlineLike } from "react-icons/ai";
 import { BsBookmark } from "react-icons/bs";
+import Image from "next/image"
 
 export default function Popular() {
   const [recipe, setRecipe] = React.useState("");
@@ -45,7 +46,7 @@ export default function Popular() {
               className="card-placeholder placeholder-glow "
             >
               <Card.Img
-                src="/placeholder.png"
+                src={"/placeholder.png"}
                 width={80}
                 height={70}
                 alt="Images"
@@ -95,8 +96,8 @@ export default function Popular() {
                 <a className="text-decoration-none ">
                   <div className="row row-cols-3 row-pop">
                     <div className="col-sm">
-                      <img
-                        src="/placeholder.png"
+                      <Image
+                        src={"/placeholder.png"}
                         width={100}
                         height={90}
                         alt="Images"
@@ -131,11 +132,11 @@ export default function Popular() {
               key={data.id}
               className="d-flex flex-end  container-mobile shadow-sm  bg-body mt-2 rounded "
             >
-              <Link className=" class-img " href={`detail/${data.id}`}>
+              <Link className=" class-Image " href={`detail/${data.id}`}>
                 <a className="text-decoration-none ">
                   <div className="row row-cols-3 row-pop">
                     <div className="col-sm">
-                      <img
+                      <Image
                         src={data.image}
                         width={100}
                         height={90}
