@@ -5,7 +5,7 @@ export default function handler(req, res) {
   const {password, confPassword} = req.body;
   if(password !== confPassword) return  res.status(400).json({ message: "Password mismatch" });
   axios
-    .patch(`http://localhost:7000/auth/update/${id}`, {
+    .patch(`https://expressjs-firebase-nodemailer.herokuapp.com/auth/update/${id}`, {
         password: password,
         confPassword: confPassword,
     })

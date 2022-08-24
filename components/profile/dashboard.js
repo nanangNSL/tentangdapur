@@ -10,12 +10,14 @@ import React from "react";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import * as Type from "../../redux/authenticate/type";
+import Link from "next/link"
 
 export default function Profile() {
   const dispatch = useDispatch();
   const { auth } = useSelector((state) => state);
   const [name, setName] = React.useState("");
   const [image, setImage] = React.useState("");
+  const [iD, setId] = React.useState('')
   const router = useRouter();
 
 
@@ -27,6 +29,7 @@ export default function Profile() {
   const decodeUser = decode(auth.token);
     setName(decodeUser?.name);
     setImage(decodeUser?.image);
+    setId(decodeUser?.userId)
   }, [auth]);
 
 
@@ -40,6 +43,11 @@ export default function Profile() {
     })
     router.push("/")
   
+  }
+
+  const handleMyRecipe = (e) => {
+    e.preventDefault();
+    router.push("/myRecipe")
   }
 
   return (
@@ -70,7 +78,7 @@ export default function Profile() {
                 </button>
               </li>
               <li>
-                <button type="button" className="btn btn-link  btn-linkprofile">
+                <button type="button" className="btn btn-link  btn-linkprofile" onClick={handleMyRecipe}>
                   <GiRibbonMedal className="icon" />
                   <span>My Recipe</span>{" "}
                   <IoIosArrowForward className="icon-end" />{" "}
@@ -84,10 +92,14 @@ export default function Profile() {
                 </button>
               </li>
               <li>
-                <button type="button" className="btn btn-link  btn-linkprofile">
-                  <AiOutlineLike className="icon" />
+                <button type="button" className="btn btn-link link-like">
+                  <Link href={`/like/${iD}`} className="link-like ">
+                  <a>
+                    <AiOutlineLike className="icon" />
                   <span>Like Recipe</span>
-                  <IoIosArrowForward className="icon-end" />{" "}
+                  <IoIosArrowForward className="icon-end" />
+                    </a></Link>
+                  
                 </button>
               </li>
               <div>

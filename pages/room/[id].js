@@ -28,7 +28,7 @@ export default function DetailsRoom() {
   };
 
   const getRooms = async (req, res) => {
-    const data = await Axios.get(`http://localhost:7000/room/${id}`);
+    const data = await Axios.get(`https://expressjs-firebase-nodemailer.herokuapp.com/room/${id}`);
     setRoom(data.data.name);
   };
 

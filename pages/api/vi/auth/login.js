@@ -4,7 +4,7 @@ export default function handler(req, res) {
   const { email, password } = req.body;
 
   axios
-    .post("http://localhost:7000/auth/login", { email, password })
+    .post("https://expressjs-firebase-nodemailer.herokuapp.com/auth/login", { email, password })
     .then((response) => {
       res.status(200).json(response.data);
     })

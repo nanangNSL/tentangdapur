@@ -16,7 +16,7 @@ export default function Chat() {
   },[]);
 
   const getRooms = async (req, res) => {
-    const response = await Axios.get("http://localhost:7000/room");
+    const response = await Axios.get("https://expressjs-firebase-nodemailer.herokuapp.com/room");
     setListRoom(response.data);
   };
 
@@ -24,7 +24,7 @@ export default function Chat() {
     setLoading(true);
     e.preventDefault();
     if (room !== "") {
-      Axios.post("http://localhost:7000/room", { name: room })
+      Axios.post("https://expressjs-firebase-nodemailer.herokuapp.com/room", { name: room })
       .finally(() =>{
         setLoading(false);
         Swal.fire({

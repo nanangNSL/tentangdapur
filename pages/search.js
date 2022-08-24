@@ -37,7 +37,7 @@ export default function HomeLogin() {
     setIsLoading(true);
     setTimeout(() => {
    Axios.get(
-      `http://localhost:7000/search?q=${query}&page=${page}&limit=${limit}`
+      `https://expressjs-firebase-nodemailer.herokuapp.com/search?q=${query}&page=${page}&limit=${limit}`
     ).then((response) => {
    setResult(response.data.result);
     setPage(response.data.page);

@@ -3,7 +3,7 @@ import axios from "axios";
 export default function handler(req, res) {
     const body  = req.body;    
     axios
-      .post("http://localhost:7000/post",{body})
+      .post("https://expressjs-firebase-nodemailer.herokuapp.com/post",{body})
       .then((response) => {
         res.status(200).json(response.data);
       })

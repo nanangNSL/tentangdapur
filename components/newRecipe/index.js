@@ -15,7 +15,7 @@ export default function NewRecipe() {
   const handleData = (req, res) => {
     setLoading(true);
     setTimeout(() => {
-      Axios.get("http://localhost:7000/search?limit=4")
+      Axios.get("https://expressjs-firebase-nodemailer.herokuapp.com/search?limit=4")
         .then((response) => {
           setRecipe(response.data.result);
         })

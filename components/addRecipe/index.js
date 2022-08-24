@@ -19,7 +19,7 @@ export default function Recipe() {
   const handleUploadChange = (e) => {
     let uploaded = e.target.files[0];
     setImage(uploaded)
-    setImagePreview(URL.createObjectURL(uploaded));
+    setImagePreview(URL?.createObjectURL(uploaded));
 }
 
   const handleUpload = () => {

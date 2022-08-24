@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import Axios from "axios";
 import { FiPlay } from "react-icons/fi";
+import { FaCloudUploadAlt } from "react-icons/fa";
 import { IoArrowBack } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { decode } from "jsonwebtoken";
@@ -12,13 +13,15 @@ import axios from "axios";
 import * as Type from "../../redux/like/type";
 import * as Tipe from "../../redux/save/type";
 import { useDispatch } from "react-redux";
+import FormData from "form-data";
+
 
 export default function Details() {
   const {
     query: { id },
   } = useRouter();
   const dispatch = useDispatch();
-  const { auth, like , save} = useSelector((state) => state);
+  const { auth, like, save } = useSelector((state) => state);
   const [title, setTitle] = React.useState();
   const [image, setImage] = React.useState();
   const [inggredients, setIngredient] = React.useState();
@@ -47,7 +50,7 @@ export default function Details() {
     if (userLike === user) {
     } else {
       await axios
-        .post("http://localhost:7000/search/like", {
+        .post("https://expressjs-firebase-nodemailer.herokuapp.com/search/like", {
           userId: user,
           recipeId: idRecipe,
           like: "1",
@@ -67,7 +70,7 @@ export default function Details() {
   };
   const handleUnlike = async (req, res) => {
     await axios
-      .post(`http://localhost:7000/search/unlike/${idLike}`)
+      .post(`https://expressjs-firebase-nodemailer.herokuapp.com/search/unlike/${idLike}`)
       .then((res) => {
         dispatch({
           type: Type.SET_LIKE,
@@ -80,12 +83,12 @@ export default function Details() {
   };
 
   const handleValidasi = async () => {
-    setLike(like.like.like);
-    setSave(save.save.save)
+    setLike(like?.like?.like);
+    setSave(save?.save?.save);
   };
   const handleSave = async (req, res) => {
     await axios
-      .post(`http://localhost:7000/search/save`, {
+      .post(`https://expressjs-firebase-nodemailer.herokuapp.com/search/save`, {
         userId: user,
         recipeId: idRecipe,
       })
@@ -98,13 +101,12 @@ export default function Details() {
         });
       })
       .catch((err) => {
-        console.log("error: " + err);
         setSave(false);
       });
   };
   const handleUnsave = async (req, res) => {
     await axios
-      .post(`http://localhost:7000/search/save/${idRecipe}`)
+      .post(`https://expressjs-firebase-nodemailer.herokuapp.com/search/save/${idRecipe}`)
       .then(() => {
         dispatch({
           type: Tipe.SET_SAVE,
@@ -114,12 +116,11 @@ export default function Details() {
         });
       })
       .catch((err) => {
-        console.log("Unsave failed: " + err);
       });
   };
 
   const handleData = async () => {
-    const data = await Axios.get(`http://localhost:7000/post/${id}`);
+    const data = await Axios.get(`https://expressjs-firebase-nodemailer.herokuapp.com/post/${id}`);
     setTitle(data.data.title);
     setImage(data.data.image);
     setIngredient(data.data.inggredients);
@@ -226,7 +227,6 @@ export default function Details() {
               <div className="card-body-det">
                 {change ? (
                   <>
-                    {" "}
                     <div className="mb-3">
                       <div className="row row-cols-3 con-det shadow-sm">
                         <div className="col col-btn">
@@ -242,33 +242,40 @@ export default function Details() {
                     </div>
                     <div className="mb-3">
                       <div className="row row-cols-3 con-det shadow-sm">
-                        <div className="col col-btn">
-                          <FiPlay />
-                        </div>
-                        <div className="col col-right">
-                          <h6 className="title-video">Step 1</h6>
-                          <small className="footer-video">
-                            Boil eggs for 3 minutes
-                          </small>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="mb-3">
-                      <div className="row row-cols-3 con-det shadow-sm">
-                        <div className="col col-btn">
-                          <FiPlay />
-                        </div>
-                        <div className="col col-right">
-                          <h6 className="title-video">Step 1</h6>
-                          <small className="footer-video">
-                            Boil eggs for 3 minutes
-                          </small>
+                        <div className="file">
+                          <input
+                            type="file"
+                            id="file"
+                            className="input-file"
+                            name="file"
+                            placeholder="Input file"
+                            hidden
+                            required
+                          />
+                          <label for="file" className="button-video">
+                            {" "}
+                            <FaCloudUploadAlt/> Upload
+                          </label>
                         </div>
                       </div>
                     </div>
                   </>
                 ) : (
-                  <span>{inggredients}</span>
+                  <>
+                   <span>{inggredients}</span>
+                  <div>
+                    <form className="form-comment">
+                      <input type="text" placeholder="input comment"/>
+                      <input
+                    className="input-group-text "
+                    id="basic-addon2"
+                    hidden
+                    type="submit"
+                  />
+                    </form>
+                  </div>
+                  </>
+                 
                 )}
               </div>
             </div>

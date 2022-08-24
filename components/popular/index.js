@@ -21,7 +21,7 @@ export default function Popular() {
     setLoading(true);
     setLoadings(true);
     setTimeout(() => {
-      Axios.get("http://localhost:7000/search?limit=7")
+      Axios.get("https://expressjs-firebase-nodemailer.herokuapp.com/search?limit=7")
         .then((response) => {
           setRecipe(response.data.result);
         })

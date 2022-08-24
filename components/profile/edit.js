@@ -34,7 +34,7 @@ export default function Edit() {
     setTimeout(() => {
       const data = new FormData();
       data.append("image", image);
-      Axios.patch(`http://localhost:7000/users/image/${id}`, data, {
+      Axios.patch(`https://expressjs-firebase-nodemailer.herokuapp.com/users/image/${id}`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -68,7 +68,7 @@ export default function Edit() {
   const handleUpdate = () => {
     setIsLoadings(true);
     setTimeout(() => {
-      Axios.patch(`http://localhost:7000/users/${id}`, {
+      Axios.patch(`https://expressjs-firebase-nodemailer.herokuapp.com/users/${id}`, {
         password: newPassword,
         confPassword: confPasswords,
       })

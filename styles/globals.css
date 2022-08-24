@@ -279,6 +279,16 @@ a {
   align-items: center;
   height: 90px;
 }
+.link-like {
+  color: #eec302 !important;
+  text-decoration: none !important;
+  width: 90%;
+}
+.link-like a{
+  color: #eec302 !important;
+  text-decoration: none !important;
+  width: 90%;
+}
 
 /* search */
 form input {
@@ -468,9 +478,9 @@ border-bottom-right-radius: 0;
 #me .message-meta{
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  /* justify-content: end; */
   justify-items: end;
-  align-items: flex-end;
+  /* align-items: flex-end; */
 }
 #me #time{
   font-size: 9px;
@@ -510,7 +520,7 @@ border-bottom-right-radius: 0;
 #other .message-meta{
   display: flex;
   flex-direction: row;
-  justify-content: start;
+  /* justify-content: start; */
   justify-items: start;
 }
 #other #time{
@@ -904,6 +914,30 @@ li button:hover {
   align-items: center;
   font-size: 29px;
 }
+.col-upload {
+  background-color: #eec302;
+  width: 19rem !important;
+  height: 50px;
+  border-radius: 15px;
+  margin-left: 3px;
+  color: #ffffff;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  font-size: 29px;
+}
+.col-upload:hover {
+  background-color: #e7e7e7;
+  width: 19rem !important;
+  height: 50px;
+  border-radius: 15px;
+  margin-left: 3px;
+  color: #eec302;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  font-size: 29px;
+}
 .title-video {
   margin-bottom: -0.5vh;
   color: #b6b6b6;
@@ -973,6 +1007,12 @@ li button:hover {
   color: #666666;
 }
 .input-file {
+  margin-top: 1vh;
+  border-radius: 15px;
+  text-align: center;
+  overflow: hidden;
+}
+.input-video {
   margin-top: 1vh;
   border-radius: 15px;
   text-align: center;
@@ -1055,7 +1095,23 @@ li button:hover {
   margin-top: 3vh;
   text-align: center;
 }
+
+.button-video {
+  background-color: #efefef !important;
+  width: 303px !important;
+  margin-left: -12%;
+  height: 49px;
+  border-radius: 15px;
+  padding: 3%;
+  margin-top: 0vh;
+  text-align: center;
+  padding: 15%;
+}
 .button-label:hover {
+  background-color: #2e266f !important;
+  color: #efefef;
+}
+.button-video:hover {
   background-color: #2e266f !important;
   color: #efefef;
 }
@@ -1065,4 +1121,17 @@ li button:hover {
   height: 100vh !important;
   flex-direction: column;
   align-items: center;
+}
+/* .container-myrecipe{
+  border: 1px solid #666666;
+  height: 100vh;
+  width: 99%;
+  display: flex;
+  flex-direction: column;
+} */
+.form-comment input{
+  width: 309px !important;
+  padding: 2%;
+  margin-left: 1vw;
+  border-radius: 15px;
 }
