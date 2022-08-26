@@ -1,5 +1,5 @@
 import Style from "../styles/pages/Home.module.css";
-import Login from "../components/form/Login";
+import Login from "../components/form/login";
 import React from "react";
 
 
