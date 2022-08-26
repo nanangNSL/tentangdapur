@@ -61,7 +61,7 @@ export default function DetailsRoom() {
     setUser(decodeUser?.name);
     joinRoom();
     getRooms();
-  }, []);
+  });
 
   const handleClick = (e) => {
     e.preventDefault();

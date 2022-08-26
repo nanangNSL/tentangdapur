@@ -97,9 +97,9 @@ export default function Login() {
                 />
               </div>
               <div className="con-forgot">
-                <a href="/forgot" className="forgot-btn  text-decoration-none">
+                <Link href="/forgot" className="forgot-btn  text-decoration-none">
                   forgot password
-                </a>
+                </Link>
               </div>
               <div>
                 <button type="submit" className="button-login"

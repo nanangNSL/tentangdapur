@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import Style from "../styles/pages/Home.module.css";
 import React ,{useState} from "react";
 import { IoChevronBackOutline } from "react-icons/io5";
@@ -13,6 +14,10 @@ import Image from "next/image";
 
 export default function HomeLogin() {
   const { search } = useSelector((state) => state);
+  React.useEffect(() => {
+    getData();
+  });
+
   let value;
   if (search === null) {
     return (value = "");
@@ -20,21 +25,17 @@ export default function HomeLogin() {
     value = search.keywords;
   }
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [query, setQuery] = useState(value ? value.keywords : "");
-  const [result, setResult] = useState([]);
-
   const [keyword, setKeyword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
  const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(7);
   const [pages, setPages] = useState(0);
   const [rows, setRows] = useState(0);
+  const [result, setResult] = useState([]);
+  const [msg, setMsg] = useState();
 
-
-  React.useEffect(() => {
-    getData();
-  });
- 
   const getData = () => {
     setIsLoading(true);
     setTimeout(() => {
@@ -55,6 +56,11 @@ export default function HomeLogin() {
         });
     }, 3000);
   };
+
+
+
+ 
+ 
 
   const changePage = ({ selected }) => {
     setPage(selected);
@@ -82,9 +88,9 @@ export default function HomeLogin() {
         <div className={Style.container}>
           <nav className="sticky-top position-fixed top-0 start-50 translate-middle navbar-mobile shadow-sm">
             <div className="d-flex">
-              <a className="navbar-brand" href="/">
+              <Link className="navbar-brand" href="/">
                 <IoChevronBackOutline className="d-inline-block btn-back" />
-              </a>
+              </Link>
               <div className="input-group">
                 <form onSubmit={handleFind} className=" form-search">
                   <input
@@ -108,6 +114,7 @@ export default function HomeLogin() {
             </div>
           </nav>
           <div>
+            <p>{msg}</p>
             <div className="container-search">
               <p className="text-result">
                 Recipe search results {rows} Page: {rows ? page + 1 : 0} of{" "}

@@ -21,7 +21,7 @@ export default function Edit() {
   React.useEffect(() => {
     const decodeUser = decode(auth?.token);
     setId(decodeUser?.userId);
-  });
+  },[auth.token]);
 
   const handleUploadChange = (e) => {
     let uploaded = e.target.files[0];
