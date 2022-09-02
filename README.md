@@ -1,34 +1,71 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h2 align="center">Tentang dapur</h2>
+<p align="center">Recipe search and real-time chat websites connect all users in the cooking room</p>
+<p align="center"><a href="https://github.com/bug-hunter-squad/client/blob/main/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/bug-hunter-squad/backend"> <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/bug-hunter-squad/client?color=277BC0"></a></p>
+<p align="center">
+<a href="https://github.com/bug-hunter-squad/backend/issues/32">Report a Bug • </a>
+<a href="https://github.com/bug-hunter-squad/backend/issues/33">Request a Feature • </a>
+<a href="https://github.com/bug-hunter-squad/backend/issues/34">Ask a Question</a></p>
 
-## Getting Started
 
-First, run the development server:
+<details>
+<summary>Table of Contents</summary>
+<br/>
+  
+* [Features](#feature)
+* [Made with](#built)
+* [Getting Started](#getting)
+  * [Prerequisites](#Prerequisites)
+  * [Installation](#Installation)
+* [License](#License)
+</details>
+<h3 id=feature>Features</h3>
+<ul>
+<li>Search resep</li>
+<li>Chat with users</li>
+<li>etc.</li>
+</ul>
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+<h3 id=built>Made With</h3>
+<ul>
+  <li>Express JS</li>
+   <li>PostgreSQL(databases)</li>
+   <li>Cloudinary (directory media files)</li>
+   <li>Axios</li>
+   <li>Multer</li>
+   <li>JWT token</li>
+   <li>Nodemailer</li>
+  <li>Midtrans (gateway payment)</li>
+</ul>
+<h3 id=getting>Getting started</h3>
+<ul>
+   <li>
+     <h4 id=Prerequisites>Prerequiresites</h4>
+     <ul>
+       <li>npm</li>
+       <code>npm install npm@latest -g</code>
+       <li>account email</li>
+       <li>account cloudinary</li>
+       <li>account midtrans</li>
+     </ul>
+  </li>
+  <li>
+     <h4 id=Installation>Intalation</h4>
+      <ul>
+        <li>Clone project</li>
+         <code></code>
+        <li>Install all dependencies</li>
+         <code>npm install</code>
+       <li>Settup <code>.env</code></li>
+         <code>Fill all secret keys</code>
+         <li>Run project</li>
+         <code>npm start</code>
+      </ul>
+   </li>
+</ul>
+<h3 id=License>License</h3>
+<ul>
+  <li><code><a href="https://github.com/bug-hunter-squad/backend/blob/main/LICENSE">MIT</a></code></li>
+</ul>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
