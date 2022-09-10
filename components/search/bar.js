@@ -26,7 +26,6 @@ export default function BarBrand() {
       <div className="border navbar-brand">
         <div className="row row-cols-1">
           <div className="col d-flex">
-          <a className="" href="/">
               <Image
                 src="/logos.png"
                 alt="logobrand"
@@ -34,7 +33,6 @@ export default function BarBrand() {
                 height={80}
                 className="ms-1 image-bar"
               />
-            </a>
             <form className=" form-search" onSubmit={handleSubmit}>
               <input
                 type="text"
