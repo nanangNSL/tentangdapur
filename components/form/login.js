@@ -108,8 +108,8 @@ export default function Login() {
                 </button>
               </div>{" "}
             </div>
-            <small className="text-center d-flex justify-content-center mt-2">
-              Don’t have an account? <Link href="/register" className="text-sign">Sign Up</Link>
+            <small className="text-center d-flex justify-content-center mt-2 footer-text">
+              Don’t have an account? <Link href="/register" className="text-sign text-decoration-none">Sign Up</Link>
             </small>
           </form>
         </div>

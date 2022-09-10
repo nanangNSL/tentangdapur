@@ -30,21 +30,22 @@ export default function NewRecipe() {
     <Container fluid>
       <Banner />
       {isloading ? (
-        <Row className="d-flex flex-row flex-nowrap d-block overflow-auto recipe-scroll mt-2 p-2">
-          {[...new Array(6)].map((item, key) => (
-             <span key={key} className="placeholder-glow span-placeholder" >
-              <Image src="/placeholder.png" alt="Images" width={100} height={100} className="images-card placeholder shadow-sm" />
-              <h5 className="title-placeholder"><span className="placeholder col-4 rounded"></span></h5>
-          </span>
-          ))}
-        </Row>
+       <Row className="d-flex flex-row flex-nowrap d-block overflow-auto recipe-scroll mt-2 p-2">
+       {[...new Array(6)].map((item, key) => (
+          <span key={key} className="placeholder-glow span-image" >
+           <Image src="/placeholder.png" alt="Images" width={200} height={150} className="images-card placeholder shadow-sm" />
+           <h5 className="title-placeholder"><span className="placeholder col-4 rounded"></span></h5>
+       </span>
+       ))}
+     </Row>
       ) : (
+       
         <Row className="d-flex flex-row flex-nowrap d-block overflow-auto recipe-scroll mt-2  p-2">
           {Array.from(recipe).map((data) => (
             <span key={data.id} className="span-image">
               <Link href={`detail/${data.id}`}>
                 <a className="text-decoration-none">
-                  <Image src={data.image} alt="Images" className="images-card" />
+                  <Image src={data.image} alt="Images" className="images-card"  width={200} height={150}/>
                   <h5 className="title-span">{data.title}</h5>
                 </a>
               </Link>

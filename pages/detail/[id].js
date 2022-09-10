@@ -1,64 +1,76 @@
 import Style from "../../styles/pages/Home.module.css";
 import { AiOutlineLike } from "react-icons/ai";
 import { BsBookmark } from "react-icons/bs";
+import { IoChevronBack } from "react-icons/io5";
 import { useRouter } from "next/router";
 import React from "react";
 import Axios from "axios";
-import { FiPlay } from "react-icons/fi";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { IoArrowBack } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { decode } from "jsonwebtoken";
-import axios from "axios";
 import * as Type from "../../redux/like/type";
 import * as Tipe from "../../redux/save/type";
 import { useDispatch } from "react-redux";
 import FormData from "form-data";
-import Image from "next/image"
+import Image from "next/image";
 import Link from "next/link";
+import Card from "react-bootstrap/Card";
+import Nav from "react-bootstrap/Nav";
+import Swal from "sweetalert2";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
 
 
-export default function Details() {
+export async function getStaticPaths() {
+  const res = await fetch('https://expressjs-firebase-nodemailer.herokuapp.com/search/home')
+  const dataRecipe = await res.json()
+
+  const paths = dataRecipe.map((data) => ({
+    params: { id: data.id.toString() },
+  }))
+
+  return { paths, fallback: true }
+}
+
+
+export async function getStaticProps({ params }) {
+  const res = await fetch(`https://expressjs-firebase-nodemailer.herokuapp.com/post/${params.id}`)
+  const dataRecipe = await res.json()
+
+  return { props: { dataRecipe } }
+}
+
+
+
+export default function Details(context) {
+  const router = useRouter();
   const {
     query: { id },
   } = useRouter();
-  React.useEffect(() => {
-    handleData();
-    handleUser();
-    handleValidasi();
-  });
+
+  const listComment = context?.dataRecipe?.comments;
+ 
   const dispatch = useDispatch();
   const { auth, like, save } = useSelector((state) => state);
-  const [title, setTitle] = React.useState();
-  const [image, setImage] = React.useState();
-  const [inggredients, setIngredient] = React.useState();
-  const [change, setChange] = React.useState(false);
-  const [likes, setLike] = React.useState(false);
-  const [userLike, setUserLike] = React.useState();
-  const [user, setUser] = React.useState();
-  const [idRecipe, setIdRecipe] = React.useState("");
-  const [idLike, setIdLike] = React.useState("");
-  const [saved, setSave] = React.useState();
+  let userID;
+  if (auth?.token) {
+    const decodeToken = decode(auth?.token);
+    userID = decodeToken.userId;
+  } else {
+    const decodeToken = decode(auth?.token);
+    userID = decodeToken?.userId;
+  }
+  console.log(userID);
 
-  const handleUser = () => {
-    const decodeUser = decode(auth?.token);
-    setUser(decodeUser?.userId);
-  };
 
-  const handleClickVideo = (e) => {
-    e.preventDefault();
-    setChange(true);
-  };
-  const handleClick = (e) => {
-    e.preventDefault();
-    setChange(false);
-  };
-  const handleLike = async (req, res) => {
-    if (userLike === user) {
+
+  const handleLike = async () => {
+    if (userLike === userID) {
     } else {
-      await axios
+      await Axios
         .post("https://expressjs-firebase-nodemailer.herokuapp.com/search/like", {
-          userId: user,
+          userId: userID,
           recipeId: idRecipe,
           like: "1",
         })
@@ -76,7 +88,7 @@ export default function Details() {
     }
   };
   const handleUnlike = async (req, res) => {
-    await axios
+    await Axios
       .post(`https://expressjs-firebase-nodemailer.herokuapp.com/search/unlike/${idLike}`)
       .then((res) => {
         dispatch({
@@ -89,14 +101,11 @@ export default function Details() {
       .catch((err) => Console.log(err));
   };
 
-  const handleValidasi = async () => {
-    setLike(like?.like?.like);
-    setSave(save?.save?.save);
-  };
-  const handleSave = async (req, res) => {
-    await axios
+
+  const handleSave = async () => {
+    await Axios
       .post(`https://expressjs-firebase-nodemailer.herokuapp.com/search/save`, {
-        userId: user,
+        userId: userID,
         recipeId: idRecipe,
       })
       .then((res) => {
@@ -112,7 +121,7 @@ export default function Details() {
       });
   };
   const handleUnsave = async (req, res) => {
-    await axios
+    await Axios
       .post(`https://expressjs-firebase-nodemailer.herokuapp.com/search/save/${idRecipe}`)
       .then(() => {
         dispatch({
@@ -122,27 +131,114 @@ export default function Details() {
           },
         });
       })
-      .catch((err) => {
-      });
-  };
-
-  const handleData = async () => {
-    const data = await Axios.get(`https://expressjs-firebase-nodemailer.herokuapp.com/post/${id}`);
-    setTitle(data.data.title);
-    setImage(data.data.image);
-    setIngredient(data.data.inggredients);
-    setUserLike(data?.data?.likes[0]?.userId);
-    setIdLike(data.data.likes[0]?.id);
-    setIdRecipe(data.data.id);
+      .catch((err) => {});
   };
  
+
+
+  const [show, setShow] = React.useState(false);
+  const ClickShow = (e) => {
+    e.preventDefault();
+    setShow(true);
+  };
+  const ClickClose = (e) => {
+    e.preventDefault();
+    setShow(false);
+  };
+
+  const [fileVideo, setFileVideo] = React.useState("");
+  const [progres, setProgres] = React.useState(false);
+  const handleFileVideo = (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    setFileVideo(file);
+  };
+
+  const uploadVideo = async (e) => {
+    e.preventDefault();
+    if(!userID){
+      Swal.fire("Please login", "Before posting a video, please login first.", "info");
+    }else{
+     setProgres(true);
+    const formData = new FormData();
+    formData.append("userId", userID);
+    formData.append("recipeId", id);
+    formData.append("video", fileVideo);
+    await Axios
+      .post(`https://expressjs-firebase-nodemailer.herokuapp.com/search/video`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        console.log("res", res);
+        Swal.fire("Upload!", "Your recipe has been uploaded.", "success");
+      })
+      .catch((err) => {
+        console.log("err", err);
+        Swal.fire(
+          "Cannot upload",
+          "The image size cannot be larger than 1 mb and the only extension allowed is .jpg | .jpeg | .png",
+          "error"
+        );
+      })
+      .finally(() => {
+        setProgres(false);
+      }); 
+    }
+    
+  };
+
+  const [valueComment, setValueComment] = React.useState("");
+  const [spiner, setSpiner] = React.useState(false);
+
+  const postComment = (e) => {
+    e.preventDefault();
+   
+    if(!userID){
+      Swal.fire("Please login", "Before posting a comment, please login first.", "info");
+    }else{
+      setSpiner(true);
+         setTimeout(() => {
+      Axios
+        .post("https://expressjs-firebase-nodemailer.herokuapp.com/search/comment", {
+          userId: userID,
+          recipeId: id,
+          comment: valueComment,
+        })
+        .then((res) => {
+          console.log("res", res);
+          Swal.fire("Upload!", "Your recipe has been uploaded.", "success");
+        })
+        .catch((err) => {
+          console.log("err", err);
+          Swal.fire(
+            "Cannot upload",
+            "The image size cannot be larger than 1 mb and the only extension allowed is .jpg | .jpeg | .png",
+            "error"
+          );
+        })
+        .finally(() => {
+          setSpiner(false);
+        });
+    }, 3000); 
+    }
+
+  };
+
   return (
     <>
       <div className={Style.containerFluid}>
         <div className={Style.container}>
+          <button
+            className="btn btn-light  position-absolute top-0 start-0 mt-4 ms-4"
+            onClick={() => router.replace("/")}
+          >
+            <IoChevronBack />
+          </button>
           <div className=" bg-light border border-1 overflow-hidden">
             <Image
-              src={image}
+              src={context?.dataRecipe?.image}
               width="400"
               height="300"
               alt="food2"
@@ -154,7 +250,7 @@ export default function Details() {
             <div className="row row-cols-3 row-pop-detail">
               <div className="col-sm ">
                 <div className="title-det">
-                  <h3>{title}</h3>
+                  <h3>{context?.dataRecipe?.title}</h3>
                   <small className="fw-semibold text-det">
                     by Tentang Dapur
                   </small>
@@ -162,7 +258,7 @@ export default function Details() {
               </div>
               <div className="col-sm-2"></div>
               <div className="col-sm col-det">
-                {saved ? (
+                {context?.dataRecipe?.save ? (
                   <button
                     onClick={handleUnsave}
                     type="buttons"
@@ -186,7 +282,7 @@ export default function Details() {
                   </button>
                 )}
 
-                {likes ? (
+                {context?.dataRecipe?.likes ? (
                   <button
                     onClick={handleUnlike}
                     type="button"
@@ -208,79 +304,160 @@ export default function Details() {
           </div>
           <div className="bg-image-recipe shadow border">
             <div className="container-inggredients">
-              <div className="card-header">
-                <ul className="nav nav-tabs card-header-tabs">
-                  <li className="nav-item">
-                    <Link
-                      className="btn-det"
-                      aria-current="true"
-                      href="#"
-                      onClick={handleClick}
-                    >
-                      Inggredients
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="btn-det" href="#" onClick={handleClickVideo}>
-                      Video
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-              <div className="card-body-det">
-                {change ? (
-                  <>
-                    <div className="mb-3">
-                      <div className="row row-cols-3 con-det shadow-sm">
-                        <div className="col col-btn">
-                          <FiPlay />
-                        </div>
-                        <div className="col col-right">
-                          <h6 className="title-video">Step 1</h6>
-                          <small className="footer-video">
-                            Boil eggs for 3 minutes
-                          </small>
-                        </div>
+              <Card className="container-card">
+                <Card.Header className="card-detail">
+                  <Nav variant="tabs" defaultActiveKey="#first">
+                    <Nav.Item>
+                      <Nav.Link href="#first" onClick={ClickClose} className="link-i">
+                        Ingredients
+                      </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link href="#link" onClick={ClickShow}  className="link-i">
+                        Video
+                      </Nav.Link>
+                    </Nav.Item>
+                  </Nav>
+                </Card.Header>
+                <Card.Body className={show ? "d-none" : "d-block"}>
+                  <Card.Text>
+                    <pre>{context?.dataRecipe?.inggredients}</pre>
+                  </Card.Text>
+                </Card.Body>
+                <Card.Body className={show ? "d-block div-video" : "d-none"}>
+                  <div className="mb-3">
+                    {context?.dataRecipe?.videos ? (
+                      <>
+                        {context?.dataRecipe?.videos.map((item) => (
+                          <>
+                            <video
+                              key={item.id}
+                              width="320"
+                              height="200"
+                              controls
+                            >
+                              <source src={item.video} type="video/mp4 " />
+                            </video>
+                          </>
+                        ))}{" "}
+                      </>
+                    ) : (
+                      <div>
+                        <Image
+                          src="/video404.png"
+                          alt="video"
+                          width={320}
+                          height={200}
+                        />
                       </div>
-                    </div>
-                    <div className="mb-3">
-                      <div className="row row-cols-3 con-det shadow-sm">
-                        <div className="file">
+                    )}
+                  </div>
+                  <div className="mb-3">
+                    <div className="row row-cols-3  shadow-sm">
+                      <div className="file">
+                        <form className="form-video" onSubmit={uploadVideo}>
                           <input
                             type="file"
                             id="file"
-                            className="input-file"
                             name="file"
                             placeholder="Input file"
+                            accept=".mp4,.3gpp,.x-msvideo"
                             hidden
+                            onChange={handleFileVideo}
                             required
                           />
-                          <label htmlFor="file" className="button-video">
-                            {" "}
-                            <FaCloudUploadAlt/> Upload
+                          <label htmlFor="file" className="label-video me-2">
+                            {progres ? (
+                              <div
+                                className="spinner-border text-warning"
+                                role="status"
+                              >
+                                <span className="visually-hidden">
+                                  Loading...
+                                </span>
+                              </div>
+                            ) : (
+                              "Upload video"
+                            )}
                           </label>
+                          <button
+                            type="submit"
+                            className="btn btn-warning btn-video"
+                          >
+                            <FaCloudUploadAlt />
+                          </button>
+                        </form>
+                        <div>
+                          <form onSubmit={postComment}>
+                            <FloatingLabel
+                              controlId="floatingTextarea2"
+                              label="Comments"
+                              className="mt-3"
+                            >
+                              <Form.Control
+                                as="textarea"
+                                placeholder="Leave a comment here"
+                                style={{ height: "100px", width: "320px" }}
+                                value={valueComment}
+                                onChange={(e) =>
+                                  setValueComment(e.target.value)
+                                }
+                              />
+                            </FloatingLabel>
+                            <div className="div-post">
+                              <button type="submit" className="btn-post">
+                                {spiner? <div
+                                className="spinner-border text-warning"
+                                role="status"
+                              >
+                                <span className="visually-hidden">
+                                  Loading...
+                                </span>
+                              </div> : 'Post'}
+                              </button>
+                            </div>
+                          </form>
+                          <div className="mt-2">
+                            <p>Comment :</p>
+                          </div>
+
+                          <div className="container-row  text-center mt-3 p-1">
+                            {listComment?.map((item) => (
+                              <div key={item.id} className="row row-cols-2 p-2">
+                                <div className="col-sm-1 p-1 div-img">
+                                  <Image
+                                    src="/avatar.png"
+                                    alt="Avatar"
+                                    width={100}
+                                    height={100}
+                                    className="avatar-post"
+                                  />
+                                </div>
+                                <div className="col-sm-10 ">
+                                  <div className="row row-cols-1  text-start mt-1">
+                                    <div className="col  fw-semibold">Nama</div>
+                                    <small className="col  .fs6">
+                                      {item.comment}
+                                    </small>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="mt-3">
+                            <span>
+                              <br />
+                            </span>
+                            <span>
+                              <br />
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </>
-                ) : (
-                  <>
-                   <span>{inggredients}</span>
-                  <div>
-                    <form className="form-comment">
-                      <input type="text" placeholder="input comment"/>
-                      <input
-                    className="input-group-text "
-                    id="basic-addon2"
-                    hidden
-                    type="submit"
-                  />
-                    </form>
                   </div>
-                  </>
-                 
-                )}
-              </div>
+                </Card.Body>
+              </Card>
             </div>
           </div>
         </div>
@@ -288,3 +465,4 @@ export default function Details() {
     </>
   );
 }
+

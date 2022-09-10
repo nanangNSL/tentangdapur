@@ -16,7 +16,7 @@ export default function HomeLogin() {
   const { search } = useSelector((state) => state);
   React.useEffect(() => {
     getData();
-  });
+  },[]);
 
   let value;
   if (search === null) {

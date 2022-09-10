@@ -76,7 +76,7 @@ export default function Register() {
                 className="form-reg"
                 name="Email"
                 aria-describedby="emailHelpId"
-                placeholder="📧 examplexxx@gmail.com"
+                placeholder="📧 Examplexxx@gmail.com"
                 required
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -93,7 +93,7 @@ export default function Register() {
                 type="password"
                 className="form-reg"
                 name="password"
-                placeholder="🔒 password"
+                placeholder="🔒 Password"
                 required
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -117,7 +117,7 @@ export default function Register() {
                 </button>
               </div>{" "}
             </div>
-            <small className="text-center d-flex justify-content-center mt-2">
+            <small className="text-center d-flex justify-content-center mt-2 footer-text">
             Do you have an account ?<Link href="/login" className="text-sign">Login</Link>
             </small>
           </form>

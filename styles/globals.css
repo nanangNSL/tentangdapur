@@ -155,14 +155,9 @@ a {
   border-radius: 5px !important;
   padding-left: 1vw;
 }
-.see-all {
-  float: right;
-  justify-items: end;
-  align-items: flex-end;
+.div-a a{
+  text-decoration: none;
   color: #2e266f;
-}
-.see-all:hover {
-  color: #eec302;
 }
 /* for background popular */
 
@@ -304,6 +299,15 @@ form button {
   margin-top: 8vh;
   margin-right: 2vw;
 }
+.navbar-brand{
+  margin-top: 10vh;
+  height: 91%;
+
+}
+.div-bar{
+  height: 65px;
+  text-align: center;
+}
 
 /* carousel */
 .carousel {
@@ -311,10 +315,7 @@ form button {
 }
 /* image serach bar */
 .image-bar {
-  width: 83px;
-  margin-top: 9vh;
-  height: 80px;
-  margin-left: 2vw;
+  object-fit: cover;
 }
 .input-bar {
   margin-left: 2vw;
@@ -564,7 +565,24 @@ border-bottom-right-radius: 0;
   align-items: center;
   justify-items: center;
   height: 100vh;
-  border: 1px solid tomato;
+}
+.div-img{
+  width: 54px !important;
+}
+.container-card{
+  border: none !important; 
+}
+.link-i{
+  color: #2d2d2d !important;
+}
+.link-i:hover{
+  color: #948282 !important;
+}
+.link-i:focus{
+  color: #eec302 !important;
+}
+.card-detail{
+background: none !important;
 }
 .bg-avatar {
   width: 12rem;
@@ -602,6 +620,7 @@ border-bottom-right-radius: 0;
   height: 50px;
   border-radius: 10px;
   border: none;
+  width: 150px !important;
 }
 .form-profile {
   width: 100%;
@@ -647,10 +666,11 @@ border-bottom-right-radius: 0;
   text-decoration: none !important;
 }
 .image-update {
-  margin-top: 3vh;
+  margin-top: 1vh;
   width: 150px;
-  height: 150px;
+  height: 100px;
   border-radius: 50%;
+  object-fit: cover;
 }
 .bg-avatar .icon {
   font-size: 100px;
@@ -827,14 +847,15 @@ li button:hover {
   padding-left: 1.5vw;
 }
 .form-search {
-  margin-top: 2vh;
+  margin-top: -8vh;
   width: 311px;
   overflow: hidden;
+  margin-left: -3px;
 }
 .form-search input {
   margin-top: 11vh;
-  height: 40px;
-  width: 272px !important;
+    height: 40px;
+    width: 262px !important;
 }
 
 .image-bg-recipe {
@@ -1031,13 +1052,17 @@ li button:hover {
 .forgot-btn:hover {
   color: #eec302;
 }
-.con-forgot {
+.con-forgot a{
   display: flex;
   flex-direction: row;
   /* justify-content: end; */
   width: 350px !important;
-  margin-left: 2%;
+  margin-left: 4%;
+  text-decoration: none !important;
+  color: #666666;
+  font-size: 12px;
 }
+
 .title-det {
   color: #ffffff;
   text-shadow: 2px 2px 3px rgba(29, 10, 10, 0.68);
@@ -1045,9 +1070,13 @@ li button:hover {
 .text-det {
   font-size: 12px;
 }
+.footer-text a{
+  text-decoration: none !important;
+  color: #eec302 !important;
+}
 .text-sign {
   text-decoration: none !important;
-  color: #eec302;
+  color: #eec302 !important;
 }
 .text-sign:hover {
   text-decoration: none !important;
@@ -1096,7 +1125,7 @@ li button:hover {
   text-align: center;
 }
 
-.button-video {
+/* .button-video {
   background-color: #efefef !important;
   width: 303px !important;
   margin-left: -12%;
@@ -1106,14 +1135,57 @@ li button:hover {
   margin-top: 0vh;
   text-align: center;
   padding: 15%;
-}
+} */
 .button-label:hover {
   background-color: #2e266f !important;
   color: #efefef;
 }
-.button-video:hover {
+/* .button-video:hover {
   background-color: #2e266f !important;
   color: #efefef;
+} */
+.div-video{
+  overflow-x: auto !important;
+  height: 100vh !important;
+}
+.form-video{
+  width: 320px !important;
+  display: flex;
+  justify-content: center;
+}
+.div-post{
+  text-align: center;
+  width: 320px;
+  margin-top: 7%;
+  display: inline-block;
+}
+.btn-post{
+  background-color: #eec302 !important;
+  color: white;
+  margin: 0;
+  height: 35px;
+  width: 320px !important;
+  padding: 0;
+  border: none;
+  border-radius: 5px;
+}
+.container-row{
+  width: 320px;
+  margin-bottom: 30vh;
+}
+.avatar-post{
+  border-radius: 25px;
+}
+.label-video{
+  width: 150px;
+  border: 1px dashed;
+  text-align: center;
+  height: 40px;
+  padding: 2%;
+  border-radius: 5px;
+}
+.btn-video{
+  margin: 0px;
 }
 .search-user {
   display: flex;

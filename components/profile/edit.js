@@ -50,6 +50,7 @@ export default function Edit() {
           });
         })
         .catch((response) => {
+          console.log(response);
           const trueResponse = response.data;
           Swal.fire({
             title: trueResponse,
@@ -126,7 +127,7 @@ export default function Edit() {
                   type="password"
                   className="input-update"
                   name="password"
-                  placeholder="🔒 Password"
+                  placeholder="🔒 New Password"
                   required
                   onChange={(e) => setNewPassword(e.target.value)}
                 />
@@ -152,19 +153,18 @@ export default function Edit() {
               </div>
             </form>
           ) : (
-            <div className="mt-5">
+            <div className="mt-5 d-flex flex-column">
               <Image
-                src={imagePreview ? imagePreview : "./avatar.png"}
+                src={imagePreview ? imagePreview : "/avatar.png"}
                 alt="image avatar"
-                width={100}
-                height={100}
+                width={150}
+                height={190}
                 className="image-update"
               />
               <form onSubmit={handleData}>
                 <input
+                id="file"
                   type="file"
-                  name="file"
-                  id="file"
                   className="inputfile"
                   required
                   hidden

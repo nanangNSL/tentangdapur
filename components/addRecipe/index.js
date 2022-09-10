@@ -47,6 +47,7 @@ export default function Recipe() {
           router.push("/");
         })
         .catch((response) => {
+          console.log(response);
           const trueResponse = response.data.message;
           Swal.fire({
             title: trueResponse,
@@ -98,13 +99,14 @@ export default function Recipe() {
                 name="comment"
                 form="usrform"
                 className="mt-2"
+                value={inggredients}
                 onChange={(e) => setInggredients(e.target.value)}
               >
                 Enter text
               </textarea>
               <div className="priview">
               <p htmlFor="image">Preview : </p>
-              <Image src={imagePreview ? imagePreview: "/placeholder.png"} width="50%" height="20%" alt="images" id="image"/>
+              <Image src={imagePreview ? imagePreview: "/placeholder.png"} width={150} height={130} alt="images" id="image"/>
               </div>
               <div className="file">
                 <input

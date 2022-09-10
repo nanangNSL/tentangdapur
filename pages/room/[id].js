@@ -11,7 +11,7 @@ import ScrollToBottom from "react-scroll-to-bottom";
 
 export default function DetailsRoom() {
   const router = useRouter();
-  const socket = io.connect("http://localhost:7000");
+  const socket = io.connect("https://expressjs-firebase-nodemailer.herokuapp.com");
   const { auth } = useSelector((state) => state);
   const {
     query: { id },
@@ -61,7 +61,7 @@ export default function DetailsRoom() {
     setUser(decodeUser?.name);
     joinRoom();
     getRooms();
-  });
+  },[]);
 
   const handleClick = (e) => {
     e.preventDefault();

@@ -7,8 +7,8 @@ export default function NewRecipe() {
       <div className="col-6 mt-2">
         <h1 style={{ fontSize: "18px" }}>New Recipe</h1>
       </div>
-      <div className="col-6 mt-2">
-        <Link href="/search"className="text-end see-all me-2 text-decoration-none">see all</Link>
+      <div className="col-6 mt-2 text-end ps-2 text-decoration-none div-a">
+        <Link href="/search" className="text-decoration-none">see all</Link>
       </div>
     </Card>
   );

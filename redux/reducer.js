@@ -1,7 +1,6 @@
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
-import { CookieStorage } from 'redux-persist-cookie-storage'
-import Cookies from 'js-cookie'
+import storage from 'redux-persist/lib/storage'
 import auth from "./authenticate/index.js";
 import recipe from "./recipe/index.js";
 import search from "./search/index.js"
@@ -13,7 +12,7 @@ import save from "./save/index.js"
 
 const persistConfig = {
   key: "root",
-  storage:  new CookieStorage(Cookies),
+  storage: storage,
   whitelist: ["auth", "like","save"],
 };
 const rootReducer = combineReducers({
