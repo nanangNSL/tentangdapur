@@ -29,6 +29,8 @@
 * [Getting Started](#getting)
   * [Prerequisites](#Prerequisites)
   * [Installation](#Installation)
+* [Testing](#test)
+  * [Start to test](#InstalTest)
 * [License](#License)
 </details>
 <h3 id=feature>Features</h3>
@@ -109,6 +111,24 @@
       </ul>
    </li>
 </ul> 
+<h3 id=test>Testing</h3>
+<p>For now I'm using <code>Jest</code> and <code>React Testing Library</code></p>
+<img alt="GitHub package.json version" src="https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white">
+<h4 id=InstalTest>Instalation</h4>
+   <ul>
+     <li>Clone project version testing
+      <ul>
+       <li>I give an example of its implementation on the client
+         <pre><code>git clone -b Unit-testing https://github.com/nanangNSL/tentangdapur.git</code> </pre>
+      </li>
+       <li>Install all dependencies
+             <pre><code>npm install</code> </pre>
+            </li>
+     </ul>
+     </li>
+     <li>Run testing</li>
+     <pre><code>npm run test</code></pre>
+   </ul>
     
 <h3 id=License>License</h3>
 <ul>
