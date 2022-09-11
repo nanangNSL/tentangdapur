@@ -50,7 +50,7 @@ export default function Myrecipe() {
                           <Image
                             src="/food2.jpg"
                             width={100}
-                            height={90}
+                            height={80}
                             alt="Images"
                             className=" image-class"
                           />

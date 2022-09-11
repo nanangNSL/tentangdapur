@@ -99,7 +99,7 @@ export default function Popular() {
                       <Image
                         src={"/placeholder.png"}
                         width={100}
-                        height={90}
+                        height={80}
                         alt="Images"
                         className=" image-class"
                       />
@@ -139,7 +139,7 @@ export default function Popular() {
                       <Image
                         src={data.image}
                         width={100}
-                        height={90}
+                        height={80}
                         alt="Images"
                         className=" image-class"
                       />

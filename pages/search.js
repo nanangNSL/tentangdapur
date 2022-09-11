@@ -14,10 +14,6 @@ import Image from "next/image";
 
 export default function HomeLogin() {
   const { search } = useSelector((state) => state);
-  React.useEffect(() => {
-    getData();
-  },[]);
-
   let value;
   if (search === null) {
     return (value = "");
@@ -25,16 +21,32 @@ export default function HomeLogin() {
     value = search.keywords;
   }
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [query, setQuery] = useState(value ? value.keywords : "");
   const [keyword, setKeyword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
  const [page, setPage] = useState(0);
-  const [limit, setLimit] = useState(7);
+  const [limit, setLimit] = useState(4);
   const [pages, setPages] = useState(0);
   const [rows, setRows] = useState(0);
   const [result, setResult] = useState([]);
   const [msg, setMsg] = useState();
+
+  React.useEffect(() => {
+    getData();
+  },[page, keyword]);
+
+ 
+  const changePage = ({ selected }) => {
+    setPage(selected);
+    if (selected === 9) {
+      setMsg(
+        "Jika tidak menemukan data yang Anda cari, silahkan cari data dengan kata kunci spesifik!"
+      );
+    } else {
+      setMsg("");
+    }
+  };
+  console.log('ini page', page)
 
   const getData = () => {
     setIsLoading(true);
@@ -43,6 +55,7 @@ export default function HomeLogin() {
         `https://expressjs-firebase-nodemailer.herokuapp.com/search?q=${query}&page=${page}&limit=${limit}`
       )
         .then((response) => {
+          console.log(response)
           setResult(response.data.result);
           setPage(response.data.page);
           setPages(response.data.totalPage);
@@ -58,20 +71,6 @@ export default function HomeLogin() {
   };
 
 
-
- 
- 
-
-  const changePage = ({ selected }) => {
-    setPage(selected);
-    if (selected === 9) {
-      setMsg(
-        "Jika tidak menemukan data yang Anda cari, silahkan cari data dengan kata kunci spesifik!"
-      );
-    } else {
-      setMsg("");
-    }
-  };
   const handleFind = (e) => {
     e.preventDefault();
     setPage(0);
@@ -141,7 +140,7 @@ export default function HomeLogin() {
                               <Image
                                 src={data.image}
                                 width={100}
-                                height={90}
+                                height={80}
                                 alt="Images"
                                 className=" image-class"
                               />
