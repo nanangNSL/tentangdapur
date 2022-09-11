@@ -70,6 +70,7 @@ export default function Login() {
 
         <div className="row-login">
           <form
+          role="form"
             className="form-login"
             onSubmit={(e) => {
               e.preventDefault();
@@ -88,6 +89,7 @@ export default function Login() {
               />
               <div className="password">
                 <input
+                role="password"
                   type="password"
                   className="form-control"
                   name="password"

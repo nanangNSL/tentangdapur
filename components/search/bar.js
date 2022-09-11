@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, } from "react-redux";
 import { useRouter } from "next/router";
 import * as Type from "../../redux/search/type";
 import Image from "next/image";

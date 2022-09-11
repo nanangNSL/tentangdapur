@@ -15,11 +15,11 @@ export default function Home() {
     </Head>
       <div className={Style.containerFluid}>
         <div className={Style.container}>
-          <BarBrand />
-          <Navbar />
+          <BarBrand  />
+          <Navbar  />
           <Carousell />
-          <NewRecipe />
-          <Popular />
+          <NewRecipe  />
+          <Popular  />
           <Footer />
         </div>
       </div>
