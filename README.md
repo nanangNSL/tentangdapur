@@ -16,7 +16,9 @@
 <p align="center">
 <a href="https://github.com/nanangNSL/tentangdapur/issues/1">Report a Bug • </a>
 <a href="https://github.com/nanangNSL/tentangdapur/issues/2">Request a Feature • </a>
-<a href="https://github.com/nanangNSL/tentangdapur/issues/3">Ask a Question</a></p>
+<a href="https://github.com/nanangNSL/tentangdapur/issues/3">Ask a Question</a></p>![mobile (24)](https://user-images.githubusercontent.com/45787278/190206452-a0c31f1f-6fda-4502-9d84-1235b52cc925.png)
+![mobile (23)](https://user-images.githubusercontent.com/45787278/190206457-16e1285b-7719-433f-aee2-f03622cb169c.png)
+
 
 
 <details>
@@ -45,14 +47,30 @@
 </ul>
 
 <h3 id=screen>Screenshot</h3>
-<div align="center">
-<img src="https://user-images.githubusercontent.com/45787278/189479984-9b297bcc-a023-49a4-9703-b63408d12374.png" width="150px" alt="images"/>
-<img src="https://user-images.githubusercontent.com/45787278/189479991-c82fb97c-b6e1-4948-a358-5afdfcd612ca.png" width="150px"  alt="images"/>
-<img src="https://user-images.githubusercontent.com/45787278/189479992-7a96f16d-783a-4906-98b0-bbeb3c29d45b.png" width="150px"  alt="images"/>
-<img src="https://user-images.githubusercontent.com/45787278/189479994-4f629790-98ff-40f1-8365-de0e3f5aa19f.png"  width="150px"  alt="images"/>
-<img src="https://user-images.githubusercontent.com/45787278/189479997-483489d5-7b53-42c2-a160-b5796d24c2a6.png"  width="150px"  alt="images"/>
-<img src="https://user-images.githubusercontent.com/45787278/189479998-7f83e41d-fc19-49cd-86d3-2929c7fde7b8.png"  width="150px"  alt="images"/>
-</div>
+<table>
+  <tr>
+    <th>Login</th>
+    <th>Register</th>
+    <th>Home</th>
+     <th>Add Recipe</th>
+     <th>Profile</th>
+     <th>Chat</th>
+     <th>Detail</th>
+  </tr>
+  <tr>
+    <td><img src="https://user-images.githubusercontent.com/45787278/190206490-dcdc8c09-2d57-46ed-b719-b8bdc2b45fd7.png"  width="150px"  alt="images"/></td>
+      <td><img src="https://user-images.githubusercontent.com/45787278/190206485-dd4e96b3-3dcf-4b1c-8c2a-488c4c388f79.png"  width="150px"  alt="images"/></td>
+<td><img src="https://user-images.githubusercontent.com/45787278/189479997-483489d5-7b53-42c2-a160-b5796d24c2a6.png"  width="150px"  alt="images"/></td>
+<td><img src="https://user-images.githubusercontent.com/45787278/189479991-c82fb97c-b6e1-4948-a358-5afdfcd612ca.png" width="150px"  alt="images"/></td>
+    <td><img src="https://user-images.githubusercontent.com/45787278/189479994-4f629790-98ff-40f1-8365-de0e3f5aa19f.png"  width="150px"  alt="images"/></td>
+<td><img src="https://user-images.githubusercontent.com/45787278/189479992-7a96f16d-783a-4906-98b0-bbeb3c29d45b.png" width="150px"  alt="images"/></td>
+<td><img src="https://user-images.githubusercontent.com/45787278/189479998-7f83e41d-fc19-49cd-86d3-2929c7fde7b8.png"  width="150px"  alt="images"/></td>
+  
+    
+  </tr>
+
+</table>
+
 
 
 <h3 id=built>Made With</h3>
