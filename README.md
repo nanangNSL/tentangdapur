@@ -65,12 +65,9 @@
     <td><img src="https://user-images.githubusercontent.com/45787278/189479994-4f629790-98ff-40f1-8365-de0e3f5aa19f.png"  width="150px"  alt="images"/></td>
 <td><img src="https://user-images.githubusercontent.com/45787278/189479992-7a96f16d-783a-4906-98b0-bbeb3c29d45b.png" width="150px"  alt="images"/></td>
 <td><img src="https://user-images.githubusercontent.com/45787278/189479998-7f83e41d-fc19-49cd-86d3-2929c7fde7b8.png"  width="150px"  alt="images"/></td>
-  
-    
   </tr>
-
 </table>
-
+<blockquote>Note: click to zoom image</blockquote>
 
 
 <h3 id=built>Made With</h3>
